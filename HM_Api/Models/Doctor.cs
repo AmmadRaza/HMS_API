@@ -11,8 +11,8 @@ namespace HM_Api.Models
 
         public string Name { get; set; }
 
-        public int CNIC { get; set; }
+        public string CNIC { get; set; }
 
-        public double Salary { get; set; }
+        public float Salary { get; set; }
     }
 }

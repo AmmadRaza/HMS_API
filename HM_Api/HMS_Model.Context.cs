@@ -26,5 +26,6 @@ namespace HM_Api
         }
     
         public virtual DbSet<PatientRegister> PatientRegisters { get; set; }
+        public virtual DbSet<AddDoctor> AddDoctors { get; set; }
     }
 }
