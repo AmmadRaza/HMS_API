@@ -12,11 +12,12 @@ namespace HM_Api
     using System;
     using System.Collections.Generic;
     
-    public partial class AddDoctor
+    public partial class Doctor
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string CNIC { get; set; }
         public Nullable<double> Salary { get; set; }
+        public string Date { get; set; }
     }
 }

@@ -70,11 +70,11 @@ namespace HM_Api.Controllers
         [HttpGet]
         [Route("api/{HM_API}/AddDocter")]
         // here we can add doctors
-        public bool AddDocter(AddDoctor DR)
+        public bool AddDocter(Doctor DR)
         {
             using (HMS_APIEntities hms = new HMS_APIEntities())
             {
-                hms.AddDoctors.Add(DR);
+                hms.Doctors.Add(DR);
                 hms.SaveChanges();
                 
             }
@@ -100,6 +100,102 @@ namespace HM_Api.Controllers
                 
             }
         }
+
+
+
+        [HttpGet]
+        [Route("api/{HM_API}/DeleteDoctor")]
+        // here we can delet patient record
+        public bool DeleteDoctor(Doctor DR)
+        {
+
+            using (HMS_APIEntities hms = new HMS_APIEntities())
+            {
+                Doctor DeleteDoctor = (from d in hms.Doctors
+                                                 where d.Id == DR.Id
+                                                 select d).FirstOrDefault();
+                hms.Doctors.Remove(DeleteDoctor);
+                hms.SaveChanges();
+            }
+            return true;
+        }
+
+        public bool GenerateSalary(decimal hoursWorkedTextBox, decimal hourlyPayRateTextBox )
+        {
+            try
+            {
+                // Named constants 
+                decimal BASE_HOURS = 40m;
+                decimal OVERTIME_RATE = 1.5m;
+ 
+                // Local variables 
+                decimal hoursWorked;     
+                decimal hourlyPayRate;    
+                decimal basePay;          
+                decimal overtimeHours;
+                decimal overtimePay;       
+                decimal grossPay;        
+ 
+                // Get the hours worked and hourly pay rate. 
+                hoursWorked = (hoursWorkedTextBox);
+                hourlyPayRate =(hourlyPayRateTextBox);
+ 
+                // Determine the gross pay. 
+                if (hoursWorked > BASE_HOURS)
+                {
+                    // Calculate the base pay (without overtime). 
+                    basePay = hourlyPayRate * BASE_HOURS;
+ 
+                    // Calculate the number of overtime hours. 
+                    overtimeHours = hoursWorked - BASE_HOURS;
+ 
+                    // Calculate the overtime pay. 
+                    overtimePay = overtimeHours * hourlyPayRate * OVERTIME_RATE;
+ 
+                    // Calculate the gross pay. 
+                    grossPay = basePay + overtimePay;
+                }
+                else
+                {
+                    // Calculate the gross pay. 
+                    grossPay = hoursWorked * hourlyPayRate;
+                }
+ 
+               
+            }
+            catch (Exception ex)
+            {
+               
+            }
+              return true;
+        }
+          
+        
+
+
+        public string GetAllDoctorSalries(int did)
+        {
+            using (HMS_APIEntities db = new HMS_APIEntities())
+            {
+                string output = "";
+
+               
+                var list = db.Doctors.Single(s => s.Id == did);
+
+                if (list.Salary == null)
+                {
+                    output = "--";
+                }
+                else
+                {
+                    output = String.Format("{0:0.##}", list.Salary);
+                }
+                return output;
+            }
+        }
+
+
+
         [HttpGet]
         [Route("api/{HM_API}/Pannel")]
         public bool Pannel(PatientRegister PR)

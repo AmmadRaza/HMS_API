@@ -5,14 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HMS_APIModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="AddDoctor">
+        <EntityType Name="Doctor">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="CNIC" Type="varchar" MaxLength="50" />
           <Property Name="Salary" Type="float" />
+          <Property Name="Date" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="PatientRegister">
           <Key>
@@ -24,7 +25,7 @@
           <Property Name="CNIC" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityContainer Name="HMS_APIModelStoreContainer">
-          <EntitySet Name="AddDoctor" EntityType="Self.AddDoctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientRegister" EntityType="Self.PatientRegister" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -42,16 +43,17 @@
         </EntityType>
         <EntityContainer Name="HMS_APIEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="PatientRegisters" EntityType="Self.PatientRegister" />
-          <EntitySet Name="AddDoctors" EntityType="HMS_APIModel.AddDoctor" />
+          <EntitySet Name="Doctors" EntityType="HMS_APIModel.Doctor" />
         </EntityContainer>
-        <EntityType Name="AddDoctor">
+        <EntityType Name="Doctor">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Salary" Type="Double" />
+          <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -69,9 +71,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="AddDoctors">
-            <EntityTypeMapping TypeName="HMS_APIModel.AddDoctor">
-              <MappingFragment StoreEntitySet="AddDoctor">
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="HMS_APIModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Salary" ColumnName="Salary" />
                 <ScalarProperty Name="CNIC" ColumnName="CNIC" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
