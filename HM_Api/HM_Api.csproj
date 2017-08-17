@@ -107,8 +107,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HMS_Model.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Appoinmennt.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\PatientRegister.cs" />
+    <Compile Include="PatientAppoinment.cs">
+      <DependentUpon>HMS_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="PatientRegister.cs">
       <DependentUpon>HMS_Model.tt</DependentUpon>
     </Compile>

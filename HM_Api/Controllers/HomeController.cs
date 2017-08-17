@@ -22,11 +22,10 @@ namespace HM_Api.Controllers
             {
                 hms.PatientRegisters.Add(PR);
                 hms.SaveChanges();
-                int id = PR.PatientId;
+              
             }
             return true;
         }
-
 
         [HttpGet]
         [Route("api/{HM_API}/UpdatePatient")]
@@ -47,7 +46,6 @@ namespace HM_Api.Controllers
             return true;
         }
 
-
         [HttpGet]
         [Route("api/{HM_API}/UpdatePatient")]
         // here we can delet patient record
@@ -65,8 +63,6 @@ namespace HM_Api.Controllers
             return true;
         }
 
-
-
         [HttpGet]
         [Route("api/{HM_API}/AddDocter")]
         // here we can add doctors
@@ -81,18 +77,16 @@ namespace HM_Api.Controllers
             return true;
         }
 
-
-
-
         [HttpGet]
         [Route("api/{HM_API}/UpdateDoctor")]
         public void UpdateDoctor(Doctor DR)
         {
             using (HMS_APIEntities hms = new HMS_APIEntities())
             {
+                int id = DR.Id;
                 if (ModelState.IsValid)
                 {
-                    DR.Id = 1;
+                    DR.Id = id;
                     hms.Entry(DR).State = EntityState.Modified;
                     hms.SaveChanges();
                     
@@ -100,8 +94,6 @@ namespace HM_Api.Controllers
                 
             }
         }
-
-
 
         [HttpGet]
         [Route("api/{HM_API}/DeleteDoctor")]
@@ -161,7 +153,6 @@ namespace HM_Api.Controllers
                     grossPay = hoursWorked * hourlyPayRate;
                 }
  
-               
             }
             catch (Exception ex)
             {
@@ -169,10 +160,7 @@ namespace HM_Api.Controllers
             }
               return true;
         }
-          
         
-
-
         public string GetAllDoctorSalries(int did)
         {
             using (HMS_APIEntities db = new HMS_APIEntities())
@@ -194,8 +182,6 @@ namespace HM_Api.Controllers
             }
         }
 
-
-
         [HttpGet]
         [Route("api/{HM_API}/Pannel")]
         public bool Pannel(PatientRegister PR)
@@ -206,9 +192,15 @@ namespace HM_Api.Controllers
 
         [HttpGet]
         [Route("api/{HM_API}/Appoinment")]
-        public bool Appoinment(PatientRegister PR)
+        public bool Appoinment(PatientRegister SearchModel)
         {
-
+            using (HMS_APIEntities hms = new HMS_APIEntities())
+            {
+                // i put business logic in a (PatientRegister.cs) for sorting by Id,Name,Phone 
+                var business = new ProductBusinessLogic();
+                var model = business.PatientRegister(SearchModel);
+                
+            }
             return true;
         }
 

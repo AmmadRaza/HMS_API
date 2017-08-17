@@ -15,6 +15,17 @@
           <Property Name="Salary" Type="float" />
           <Property Name="Date" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="PatientAppoinment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Patient_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Patient_CNIC" Type="varchar" MaxLength="50" />
+          <Property Name="Patient_Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Appoinment_Date" Type="nvarchar" MaxLength="50" />
+          <Property Name="Doctor_Id" Type="int" />
+        </EntityType>
         <EntityType Name="PatientRegister">
           <Key>
             <PropertyRef Name="PatientId" />
@@ -26,6 +37,7 @@
         </EntityType>
         <EntityContainer Name="HMS_APIModelStoreContainer">
           <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientAppoinment" EntityType="Self.PatientAppoinment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientRegister" EntityType="Self.PatientRegister" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -44,6 +56,7 @@
         <EntityContainer Name="HMS_APIEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="PatientRegisters" EntityType="Self.PatientRegister" />
           <EntitySet Name="Doctors" EntityType="HMS_APIModel.Doctor" />
+          <EntitySet Name="PatientAppoinments" EntityType="HMS_APIModel.PatientAppoinment" />
         </EntityContainer>
         <EntityType Name="Doctor">
           <Key>
@@ -54,6 +67,17 @@
           <Property Name="CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Salary" Type="Double" />
           <Property Name="Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PatientAppoinment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Patient_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Patient_CNIC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Patient_Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Appoinment_Date" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Doctor_Id" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -82,7 +106,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="PatientAppoinments">
+            <EntityTypeMapping TypeName="HMS_APIModel.PatientAppoinment">
+              <MappingFragment StoreEntitySet="PatientAppoinment">
+                <ScalarProperty Name="Doctor_Id" ColumnName="Doctor_Id" />
+                <ScalarProperty Name="Appoinment_Date" ColumnName="Appoinment_Date" />
+                <ScalarProperty Name="Patient_Phone" ColumnName="Patient_Phone" />
+                <ScalarProperty Name="Patient_CNIC" ColumnName="Patient_CNIC" />
+                <ScalarProperty Name="Patient_Name" ColumnName="Patient_Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

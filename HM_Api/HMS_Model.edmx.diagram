@@ -6,7 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="b12ef547929b4aacbd65edd9405a1f37" Name="Diagram1">
         <EntityTypeShape EntityType="HMS_APIModel.PatientRegister" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HMS_APIModel.Doctor" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="HMS_APIModel.Doctor" Width="1.5" PointX="3.75" PointY="0.75" />
+        <EntityTypeShape EntityType="HMS_APIModel.PatientAppoinment" Width="1.5" PointX="0.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
